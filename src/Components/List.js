@@ -1,5 +1,6 @@
 import React from 'react';
 import Product from './Product.js';
+
 function List(props) {
   const listItems = props.products.map((p) => (
     <li key={p.description}>

@@ -35,7 +35,6 @@ function List(props) {
             type="button"
             value="-"
             class="button-minus"
-            data-field="quantity"
           ></input>
           <input
             onChange={(e) => props.getTotal(e.target.value)}
@@ -49,11 +48,9 @@ function List(props) {
             type="button"
             value="+"
             class="button-plus"
-            data-field="quantity"
           ></input>
         </div>
         <h3 class="item">{sum}</h3>
-        <Button variant="contained">Contained</Button>
       </div>
     </div>
   );
