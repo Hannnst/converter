@@ -17,54 +17,32 @@ import List from './Components/List.js';
 // ***Your solution goes to the ex04 folder***
 
 function App(props) {
+  
+  let img1 = 'https://pricespy-75b8.kxcdn.com/product/standard/280/5755951.jpg';
   const products = [
-    { description: 'pants', price: 55 },
-    { description: 'shirt', price: 799 },
-    { description: 'shoes', price: 349 },
+    { description: 'pants', price: 55, src: { img1 } },
+    { description: 'shirt', price: 799, src: { img1 } },
+    { description: 'shoes', price: 349, src: { img1 } },
   ];
   const [total, setTotal] = useState(0);
+  const [message, setMessage] = useState('Not eligible for free shipping');
+  const [color, setColor] = useState('red');
 
   // every time price is updated, a global app list containing all bought items will be updated.
   const getTotal = (e) => {
+    setShipping(total);
     setTotal(total + e);
   };
-  const getSum = (e) => {
-    setSum(e);
+
+  const setShipping = ({ total }) => {
+    if (total >= 500) {
+      setMessage('FREE SHIPPING');
+      setColor('green');
+    } else {
+      setMessage('Not eligible for free shipping');
+      setColor('red');
+    }
   };
-  // Functionality for the product quantity, can be put in its own component!
-  /*function incrementValue(e) {
-    e.preventDefault();
-    var fieldName = $(e.target).data('field');
-    var parent = $(e.target).closest('div');
-    var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
-  
-    if (!isNaN(currentVal)) {
-      parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
-    } else {
-      parent.find('input[name=' + fieldName + ']').val(0);
-    }
-  }
-  
-  function decrementValue(e) {
-    e.preventDefault();
-    var fieldName = $(e.target).data('field');
-    var parent = $(e.target).closest('div');
-    var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
-  
-    if (!isNaN(currentVal) && currentVal > 0) {
-      parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
-    } else {
-      parent.find('input[name=' + fieldName + ']').val(0);
-    }
-  }
-  
-  $('.input-group').on('click', '.button-plus', function(e) {
-    incrementValue(e);
-  });
-  
-  $('.input-group').on('click', '.button-minus', function(e) {
-    decrementValue(e);
-  });*/
 
   return (
     <div>
@@ -72,6 +50,7 @@ function App(props) {
       <h1>CART</h1>
       <h1>TOTAL: {total}</h1>
       <List products={products} getTotal={getTotal} />
+      <p style={{ color: color }}> {message} </p>
     </div>
   );
 }

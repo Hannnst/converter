@@ -12,6 +12,7 @@ function List(props) {
       getTotal={props.getTotal}
       description={p.description}
       price={p.price}
+      src={p.src}
     ></Product>
   ));
 

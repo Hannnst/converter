@@ -1,31 +1,33 @@
 import React, { useState } from 'react';
 import './Component.css';
+import Button from '@material-ui/core/Button';
+
 function List(props) {
   const description = props.description;
   const price = props.price;
   const [sum, setSum] = useState(props.price);
   const [quantity, setQuantity] = useState(0);
 
-  /*<input
-  name="email"
-  onChange={(e) => props.getPrice(e.target.value)}
-  type="email"
-/>*/
   const increment = () => {
     setQuantity(quantity + 1);
     setSum(sum + price);
     props.getTotal(price);
   };
   const decrement = () => {
-    setQuantity(quantity - 1);
-    setSum(sum - price);
-    props.getTotal(-price);
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+      setSum(sum - price);
+      props.getTotal(-price);
+    }
   };
 
   return (
     <div>
       <div class="product">
-        <div>Image</div>
+        <image class="item" src={props.src}>
+          Image
+        </image>
+        <div class="item">{description}</div>
         <h3 class="item">{price}</h3>
         <div class="input-group">
           <input
@@ -51,6 +53,7 @@ function List(props) {
           ></input>
         </div>
         <h3 class="item">{sum}</h3>
+        <Button variant="contained">Contained</Button>
       </div>
     </div>
   );
