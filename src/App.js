@@ -1,32 +1,78 @@
-import React from "react";
-import "./style.css";
+import React, { useState } from 'react';
+import ReactDom from 'react-dom';
+import List from './Components/List.js';
+// ## Exercise 4
 
-// Create a euro to dollar (and viceversa) convertor. It needs to take the input from one component and then render the converted value from a child component.
+// Create a cart component that will display a list of products in cart. For the products you can use the same array from the products page but with a new key value pair for the quantity.
 
-// It is up to you which component does the actual conversion...
+// Requirements:
 
-// Extra:
-// - Use an external API to get real exchanges rates, you can use this one: https://currencylayer.com/
-// (they will ask you to register and will give you a free plan and an api key)
+// - you can use React Hooks or class components for this exercise
+// - you should display the total cost of the products
+// - you should be able to change the product's quantity
+// - you should display a free shipping green message once the total gets to 500€ or more, otherwise not eligible for a free shipping red message.
 
-// > Use js fetch to get the data from the API: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+// [Screenshot of cart example](https://barcelonacodeschool.com/files/pics/cur_files/reactB4E4.png)
 
-// ```
-// fetch(`http://www.apilayer.net/api/live?access_key=${your_api_key_here}`)
-// .then( res => res.json())
-// .then( response => console.log(response))
-// .catch( error => console.log(error))
-// ```
-// > In case of errors about CORS , check this link : https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en
+// ***Your solution goes to the ex04 folder***
 
-// ***Your solution goes to the ex02 folder***
+function App(props) {
+  const products = [
+    { description: 'pants', price: 55 },
+    { description: 'shirt', price: 799 },
+    { description: 'shoes', price: 349 },
+  ];
+  const [total, setTotal] = useState(0);
 
+  // every time price is updated, a global app list containing all bought items will be updated.
+  const getTotal = (e) => {
+    setTotal(total + e);
+  };
+  const getSum = (e) => {
+    setSum(e);
+  };
+  // Functionality for the product quantity, can be put in its own component!
+  /*function incrementValue(e) {
+    e.preventDefault();
+    var fieldName = $(e.target).data('field');
+    var parent = $(e.target).closest('div');
+    var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+  
+    if (!isNaN(currentVal)) {
+      parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
+    } else {
+      parent.find('input[name=' + fieldName + ']').val(0);
+    }
+  }
+  
+  function decrementValue(e) {
+    e.preventDefault();
+    var fieldName = $(e.target).data('field');
+    var parent = $(e.target).closest('div');
+    var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+  
+    if (!isNaN(currentVal) && currentVal > 0) {
+      parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
+    } else {
+      parent.find('input[name=' + fieldName + ']').val(0);
+    }
+  }
+  
+  $('.input-group').on('click', '.button-plus', function(e) {
+    incrementValue(e);
+  });
+  
+  $('.input-group').on('click', '.button-minus', function(e) {
+    decrementValue(e);
+  });*/
 
-export default function App() {
   return (
     <div>
-      <h1>Hello StackBlitz!</h1>
-      <p>Start editing to see some magic happen :)</p>
+      <div></div>
+      <h1>CART</h1>
+      <h1>TOTAL: {total}</h1>
+      <List products={products} getTotal={getTotal} />
     </div>
   );
 }
+export default App;
